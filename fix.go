@@ -106,17 +106,7 @@ func fixWithFilename(ctx context.Context, def *definition, filename string, file
 	return fix(ctx, r, fileSize, charset, def)
 }
 
-func fix( //nolint:funlen,cyclop
-	ctx context.Context,
-	r io.Reader,
-	fileSize int64,
-	_ string,
-	def *definition,
-) (io.Reader, bool, error) {
-	log := logr.FromContextOrDiscard(ctx)
-
-	buf := bytes.NewBuffer([]byte{})
-
+func computeIndentationValues(def *definition) (int, []byte, []byte, error) {
 	size := def.IndentSize
 	if def.TabWidth != 0 {
 		size = def.TabWidth
@@ -127,8 +117,9 @@ func fix( //nolint:funlen,cyclop
 		size = 2
 	}
 
+	// Value to be used
 	var c []byte
-
+	// Value that needs to be replaced
 	var x []byte
 
 	switch def.IndentStyle {
@@ -141,11 +132,30 @@ func fix( //nolint:funlen,cyclop
 	case "", UnsetValue:
 		size = 0
 	default:
-		return nil, false, fmt.Errorf(
+		return 0, nil, nil, fmt.Errorf(
 			"%w: %q is an invalid value of indent_style, want tab or space",
 			ErrConfiguration,
 			def.IndentStyle,
 		)
+	}
+
+	return size, c, x, nil
+}
+
+func fix( //nolint:funlen
+	ctx context.Context,
+	r io.Reader,
+	fileSize int64,
+	_ string,
+	def *definition,
+) (io.Reader, bool, error) {
+	log := logr.FromContextOrDiscard(ctx)
+
+	buf := bytes.NewBuffer([]byte{})
+
+	size, goodIndentation, badIndentation, err := computeIndentationValues(def)
+	if err != nil {
+		return nil, false, err
 	}
 
 	eol, err := def.EOL()
@@ -162,7 +172,7 @@ func fix( //nolint:funlen,cyclop
 	errs := ReadLines(r, fileSize, func(index int, data []byte, isEOF bool) error {
 		var f bool
 		if size != 0 {
-			data, f = fixTabAndSpacePrefix(data, c, x)
+			data, f = fixTabAndSpacePrefix(data, goodIndentation, badIndentation)
 			fixed = fixed || f
 		}
 
