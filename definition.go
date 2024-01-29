@@ -32,8 +32,9 @@ func newDefinition(d *editorconfig.Definition) (*definition, error) { //nolint:c
 		TabWidth:   d.TabWidth,
 	}
 
-	if def.Charset == "utf-8-bom" {
-		def.Charset = "utf-8 bom"
+	// Backward compatibility with buggy core.
+	if def.Charset == "utf-8 bom" {
+		def.Charset = "utf-8-bom"
 	}
 
 	if d.IndentSize != "" && d.IndentSize != UnsetValue {
