@@ -95,6 +95,7 @@ func errorAt(au aurora.Aurora, line []byte, position int) (string, error) {
 		if (line[i] >> 6) != 0b10 {
 			break
 		}
+
 		position--
 	}
 

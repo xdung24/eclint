@@ -17,7 +17,7 @@ func TestReadLines(t *testing.T) {
 		{
 			Name: "Empty file",
 			File: []byte(""),
-			LineFunc: func(i int, line []byte, isEOF bool) error {
+			LineFunc: func(i int, line []byte, _ bool) error {
 				if i != 0 || len(line) > 0 {
 					return fmt.Errorf("more than one line found (%d), or non empty line %q", i, line)
 				}
@@ -27,7 +27,7 @@ func TestReadLines(t *testing.T) {
 		}, {
 			Name: "crlf",
 			File: []byte("\r\n\r\n"),
-			LineFunc: func(i int, line []byte, isEOF bool) error {
+			LineFunc: func(i int, line []byte, _ bool) error {
 				if i > 1 || len(line) > 2 {
 					return fmt.Errorf("more than two lines found (%d), or non empty line %q", i, line)
 				}
@@ -37,7 +37,7 @@ func TestReadLines(t *testing.T) {
 		}, {
 			Name: "cr",
 			File: []byte("\r\r"),
-			LineFunc: func(i int, line []byte, isEOF bool) error {
+			LineFunc: func(i int, line []byte, _ bool) error {
 				if i > 1 || len(line) > 2 {
 					return fmt.Errorf("more than two lines found (%d), or non empty line %q", i, line)
 				}
@@ -47,7 +47,7 @@ func TestReadLines(t *testing.T) {
 		}, {
 			Name: "lf",
 			File: []byte("\n\n"),
-			LineFunc: func(i int, line []byte, isEOF bool) error {
+			LineFunc: func(i int, line []byte, _ bool) error {
 				if i > 1 || len(line) > 2 {
 					return fmt.Errorf("more than two lines found (%d), or non empty line %q", i, line)
 				}
@@ -64,6 +64,7 @@ func TestReadLines(t *testing.T) {
 			t.Parallel()
 
 			r := bytes.NewReader(tc.File)
+
 			errs := eclint.ReadLines(r, -1, tc.LineFunc)
 			if len(errs) > 0 {
 				t.Errorf("no errors were expected, got some. %s", errs[0])

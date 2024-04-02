@@ -52,7 +52,7 @@ func TestBlockCommentValidSpec(t *testing.T) {
 	ctx := context.TODO()
 
 	for _, f := range []string{"a", "b"} {
-		for _, err := range eclint.Lint(ctx, fmt.Sprintf("./testdata/block_comments/%s", f)) {
+		for _, err := range eclint.Lint(ctx, "./testdata/block_comments/"+f) {
 			if err != nil {
 				t.Fatalf("no errors where expected, got %s", err)
 			}
@@ -64,7 +64,7 @@ func TestBlockCommentInvalidSpec(t *testing.T) {
 	ctx := context.TODO()
 
 	for _, f := range []string{"c"} {
-		errs := eclint.Lint(ctx, fmt.Sprintf("./testdata/block_comments/%s", f))
+		errs := eclint.Lint(ctx, "./testdata/block_comments/"+f)
 		if len(errs) == 0 {
 			t.Errorf("one error was expected, got none")
 		}
@@ -87,7 +87,7 @@ func TestLintImages(t *testing.T) {
 	ctx := context.TODO()
 
 	for _, f := range []string{"edcon_tool.png", "edcon_tool.pdf", "hello.txt.gz"} {
-		for _, err := range eclint.Lint(ctx, fmt.Sprintf("./testdata/images/%s", f)) {
+		for _, err := range eclint.Lint(ctx, "./testdata/images/"+f) {
 			if err != nil {
 				t.Fatalf("no errors where expected, got %s", err)
 			}
@@ -99,7 +99,7 @@ func TestMaxLineLengthValidSpec(t *testing.T) {
 	ctx := context.TODO()
 
 	for _, f := range []string{"a", "b"} {
-		for _, err := range eclint.Lint(ctx, fmt.Sprintf("./testdata/max_line_length/%s", f)) {
+		for _, err := range eclint.Lint(ctx, "./testdata/max_line_length/"+f) {
 			if err != nil {
 				t.Fatalf("no errors where expected, got %s", err)
 			}
@@ -111,7 +111,7 @@ func TestMaxLineLengthInvalidSpec(t *testing.T) {
 	ctx := context.TODO()
 
 	for _, f := range []string{"c"} {
-		errs := eclint.Lint(ctx, fmt.Sprintf("./testdata/max_line_length/%s", f))
+		errs := eclint.Lint(ctx, "./testdata/max_line_length/"+f)
 		if len(errs) == 0 {
 			t.Errorf("one error was expected, got none")
 		}
@@ -122,7 +122,7 @@ func TestInsertFinalNewlineSpec(t *testing.T) {
 	ctx := context.TODO()
 
 	for _, f := range []string{"with_final_newline.txt", "no_final_newline.md"} {
-		for _, err := range eclint.Lint(ctx, fmt.Sprintf("./testdata/insert_final_newline/%s", f)) {
+		for _, err := range eclint.Lint(ctx, "./testdata/insert_final_newline/"+f) {
 			if err != nil {
 				t.Fatalf("no errors where expected, got %s", err)
 			}
@@ -134,7 +134,7 @@ func TestInsertFinalNewlineInvalidSpec(t *testing.T) {
 	ctx := context.TODO()
 
 	for _, f := range []string{"no_final_newline.txt", "with_final_newline.md"} {
-		errs := eclint.Lint(ctx, fmt.Sprintf("./testdata/insert_final_newline/%s", f))
+		errs := eclint.Lint(ctx, "./testdata/insert_final_newline/"+f)
 		if len(errs) == 0 {
 			t.Errorf("one error was expected, got none")
 		}

@@ -305,6 +305,7 @@ func fixInsertFinalNewline(buf *bytes.Buffer, insertFinalNewline bool, endOfLine
 	} else {
 		for bytes.HasSuffix(buf.Bytes(), endOfLine) {
 			fixed = true
+
 			buf.Truncate(buf.Len() - len(endOfLine))
 		}
 	}
