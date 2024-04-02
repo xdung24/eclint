@@ -32,6 +32,7 @@ func SplitLines(data []byte, atEOF bool) (int, []byte, error) {
 
 			return i, data[0:i], nil
 		}
+
 		i++
 	}
 
@@ -72,6 +73,7 @@ func ReadLines(r io.Reader, fileSize int64, fn LineFunc) []error {
 		if err := fn(i, line, read == fileSize); err != nil {
 			errs = append(errs, err)
 		}
+
 		i++
 	}
 

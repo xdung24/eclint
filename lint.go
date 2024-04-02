@@ -179,6 +179,7 @@ func validate( //nolint:cyclop,gocognit,funlen
 		if err == nil && def.MaxLength > 0 {
 			// Remove any BOM from the first line.
 			d := data
+
 			if index == 0 && charset != "" {
 				for _, bom := range [][]byte{utf8Bom} {
 					if bytes.HasPrefix(data, bom) {
@@ -188,6 +189,7 @@ func validate( //nolint:cyclop,gocognit,funlen
 					}
 				}
 			}
+
 			err = MaxLineLength(def.MaxLength, def.TabWidth, d)
 		}
 

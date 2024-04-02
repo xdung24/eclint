@@ -29,6 +29,7 @@ func TestEndOfLine(t *testing.T) {
 		tc := tc
 		t.Run(tc.Name, func(t *testing.T) {
 			t.Parallel()
+
 			err := endOfLine(tc.EndOfLine, tc.Line)
 			if err != nil {
 				t.Errorf("no errors were expected, got %s", err)
@@ -85,6 +86,7 @@ func TestEndOfLineFailures(t *testing.T) {
 		tc := tc
 		t.Run(tc.Name, func(t *testing.T) {
 			t.Parallel()
+
 			err := endOfLine(tc.EndOfLine, tc.Line)
 
 			var ve ValidationError
@@ -94,6 +96,7 @@ func TestEndOfLineFailures(t *testing.T) {
 				if !ok {
 					t.Errorf("a ValidationError was expected, got %t", err)
 				}
+
 				if tc.Position != ve.Position {
 					t.Errorf("position mismatch %d, got %d", tc.Position, ve.Position)
 				}
@@ -133,6 +136,7 @@ func TestTrimTrailingWhitespace(t *testing.T) {
 		tc := tc
 		t.Run(tc.Name, func(t *testing.T) {
 			t.Parallel()
+
 			err := checkTrimTrailingWhitespace(tc.Line)
 			if err != nil {
 				t.Errorf("no errors were expected, got %s", err)
@@ -159,6 +163,7 @@ func TestTrimTrailingWhitespaceFailure(t *testing.T) {
 		tc := tc
 		t.Run(tc.Name, func(t *testing.T) {
 			t.Parallel()
+
 			err := checkTrimTrailingWhitespace(tc.Line)
 			if err == nil {
 				t.Error("an error was expected")
@@ -205,6 +210,7 @@ func TestIndentStyle(t *testing.T) {
 		tc := tc
 		t.Run(tc.Name, func(t *testing.T) {
 			t.Parallel()
+
 			err := indentStyle(tc.IndentStyle, tc.IndentSize, tc.Line)
 			if err != nil {
 				t.Errorf("no errors were expected, got %s", err)
@@ -256,6 +262,7 @@ func TestIndentStyleFailure(t *testing.T) {
 		tc := tc
 		t.Run(tc.Name, func(t *testing.T) {
 			t.Parallel()
+
 			err := indentStyle(tc.IndentStyle, tc.IndentSize, tc.Line)
 			if err == nil {
 				t.Error("an error was expected")
@@ -282,6 +289,7 @@ func TestCheckBlockComment(t *testing.T) {
 		tc := tc
 		t.Run(tc.Name, func(t *testing.T) {
 			t.Parallel()
+
 			err := checkBlockComment(tc.Position, tc.Prefix, tc.Line)
 			if err != nil {
 				t.Errorf("no errors were expected, got %s", err)
@@ -338,6 +346,7 @@ func TestMaxLineLength(t *testing.T) {
 		tc := tc
 		t.Run(tc.Name, func(t *testing.T) {
 			t.Parallel()
+
 			err := MaxLineLength(tc.MaxLineLength, tc.TabWidth, tc.Line)
 			if err != nil {
 				t.Errorf("no errors were expected, got %s", err)
@@ -369,6 +378,7 @@ func TestMaxLineLengthFailure(t *testing.T) {
 		tc := tc
 		t.Run(tc.Name, func(t *testing.T) {
 			t.Parallel()
+
 			err := MaxLineLength(tc.MaxLineLength, tc.TabWidth, tc.Line)
 			if err == nil {
 				t.Error("an error was expected")

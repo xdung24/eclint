@@ -61,6 +61,7 @@ without a final newline.`),
 			t.Parallel()
 
 			insertFinalNewline := !tc.InsertFinalNewline
+
 			def, err := newDefinition(&editorconfig.Definition{
 				InsertFinalNewline: &insertFinalNewline,
 			})
@@ -119,6 +120,7 @@ func TestBlockComment(t *testing.T) {
 			def.Raw["block_comment_start"] = tc.BlockCommentStart
 			def.Raw["block_comment"] = tc.BlockComment
 			def.Raw["block_comment_end"] = tc.BlockCommentEnd
+
 			d, err := newDefinition(def)
 			if err != nil {
 				t.Fatal(err)

@@ -53,6 +53,7 @@ func TestFixEndOfLine(t *testing.T) { //nolint:gocognit
 			}
 
 			r := bytes.NewReader(file)
+
 			out, fixed, err := fix(ctx, r, fileSize, "utf-8", def)
 			if err != nil {
 				t.Fatalf("no errors where expected, got %s", err)
@@ -84,6 +85,7 @@ func TestFixEndOfLine(t *testing.T) { //nolint:gocognit
 			}
 
 			r := bytes.NewReader(file)
+
 			out, fixed, err := fix(ctx, r, fileSize, "utf-8", def)
 			if err != nil {
 				t.Fatalf("no errors where expected, got %s", err)
@@ -150,6 +152,7 @@ func TestFixIndentStyle(t *testing.T) {
 			}
 
 			r := bytes.NewReader(tc.File)
+
 			out, _, err := fix(ctx, r, fileSize, "utf-8", def)
 			if err != nil {
 				t.Fatalf("no errors where expected, got %s", err)
@@ -316,6 +319,7 @@ func TestFixInsertFinalNewline(t *testing.T) {
 			before := buf.Bytes()
 			fixInsertFinalNewline(&buf, tc.InsertFinalNewline, tc.EolVariant)
 			after := buf.Bytes()
+
 			err := checkInsertFinalNewline(buf.Bytes(), tc.InsertFinalNewline)
 			if err != nil {
 				t.Logf("before: %q", string(before))

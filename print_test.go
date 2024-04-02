@@ -52,14 +52,17 @@ func TestPrintErrors(t *testing.T) {
 		// Test the nominal case
 		t.Run(tc.Name, func(t *testing.T) {
 			t.Parallel()
+
 			buf := bytes.NewBuffer(make([]byte, 0, 1024))
 			opt := &eclint.Option{
 				Stdout: buf,
 			}
+
 			err := eclint.PrintErrors(ctx, opt, tc.Name, tc.Errors)
 			if err != nil {
 				t.Error("no errors were expected")
 			}
+
 			outputLength := buf.Len()
 			if (outputLength > 0) != tc.HasOutput {
 				t.Errorf("unexpected output length got %d, wanted %v", outputLength, tc.HasOutput)
