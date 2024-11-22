@@ -97,6 +97,8 @@ func (def *definition) EOL() ([]byte, error) {
 		return []byte{cr, lf}, nil
 	case editorconfig.EndOfLineLf:
 		return []byte{lf}, nil
+	case "": // unset
+		return []byte(""), nil
 	default:
 		return nil, fmt.Errorf("%w: unsupported EndOfLine value %s", ErrConfiguration, def.EndOfLine)
 	}
