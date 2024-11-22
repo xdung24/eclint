@@ -212,10 +212,14 @@ func fix( //nolint:funlen
 func fixEndOfLine(data []byte, eol []byte) ([]byte, bool) {
 	fixed := false
 
-	if !bytes.HasSuffix(data, eol) {
-		fixed = true
-		data = bytes.TrimRight(data, "\r\n")
+	if bytes.HasSuffix(data, []byte("\r\n")) && !bytes.Equal(eol, []byte("\r\n")) {
+		data = bytes.TrimSuffix(data, []byte("\r\n"))
 		data = append(data, eol...)
+		fixed = true
+	} else if bytes.HasSuffix(data, []byte("\n")) && !bytes.Equal(eol, []byte("\n")) {
+		data = bytes.TrimSuffix(data, []byte("\n"))
+		data = append(data, eol...)
+		fixed = true
 	}
 
 	return data, fixed
