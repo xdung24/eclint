@@ -18,7 +18,7 @@ Which can be verified using [minisig](https://jedisct1.github.io/minisign/) or [
 ## Usage
 
 ```
-$ go install gitlab.com/xdung24/eclint/cmd/eclint@latest
+$ go install github.com/xdung24/eclint/cmd/eclint@latest
 
 $ eclint -version
 ```
