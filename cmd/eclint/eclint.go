@@ -12,7 +12,7 @@ import (
 	"github.com/editorconfig/editorconfig-core-go/v2"
 	"github.com/go-logr/logr"
 	"github.com/mattn/go-colorable"
-	"gitlab.com/greut/eclint"
+	"github.com/xdung24/eclint"
 	"golang.org/x/term"
 	"k8s.io/klog/v2"
 	"k8s.io/klog/v2/klogr"

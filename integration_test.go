@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"gitlab.com/greut/eclint"
+	"github.com/xdung24/eclint"
 )
 
 func TestLintSimple(t *testing.T) {

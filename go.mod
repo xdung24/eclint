@@ -1,4 +1,4 @@
-module gitlab.com/greut/eclint
+module github.com/xdung24/eclint
 
 go 1.20
 

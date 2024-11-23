@@ -6,7 +6,7 @@ import (
 	"errors"
 	"testing"
 
-	"gitlab.com/greut/eclint"
+	"github.com/xdung24/eclint"
 )
 
 func TestPrintErrors(t *testing.T) {

@@ -8,7 +8,7 @@ import (
 	"testing"
 	"unicode/utf16"
 
-	"gitlab.com/greut/eclint"
+	"github.com/xdung24/eclint"
 )
 
 func utf16le(s string) []byte {

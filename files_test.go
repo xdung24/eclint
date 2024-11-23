@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"gitlab.com/greut/eclint"
+	"github.com/xdung24/eclint"
 )
 
 const (

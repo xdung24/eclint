@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/editorconfig/editorconfig-core-go/v2"
-	"gitlab.com/greut/eclint"
+	"github.com/xdung24/eclint"
 )
 
 func TestOverridingUsingPrefix(t *testing.T) {
