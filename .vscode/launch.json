@@ -11,9 +11,11 @@
             "mode": "auto",
             "program": "${workspaceFolder}/cmd/eclint/main.go",
             "args": [
-                "-fix"
+                "-fix",
+                "-v",
+                "1"
             ],
-            "cwd": "${workspaceFolder}/testdata"
+            "cwd": "${workspaceFolder}/testdata/fix"
         }
     ]
 }
