@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Launch file",
             "mode": "auto",
-            "program": "${workspaceFolder}/cmd/eclint/main.go",
+            "program": "${workspaceFolder}/cmd/eclint/eclint.go",
             "args": [
                 "-fix",
                 "-v",

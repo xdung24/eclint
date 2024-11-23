@@ -212,16 +212,28 @@ func fix( //nolint:funlen
 func fixEndOfLine(data []byte, eol []byte) ([]byte, bool) {
 	fixed := false
 
-	if bytes.HasSuffix(data, []byte("\r\n")) && !bytes.Equal(eol, []byte("\r\n")) {
-		data = bytes.TrimSuffix(data, []byte("\r\n"))
-		data = append(data, eol...)
-		fixed = true
-	} else if bytes.HasSuffix(data, []byte("\n")) && !bytes.Equal(eol, []byte("\n")) {
-		data = bytes.TrimSuffix(data, []byte("\n"))
-		data = append(data, eol...)
-		fixed = true
+	if bytes.HasSuffix(data, []byte("\r\n")) {
+		if !bytes.Equal(eol, []byte("\r\n")) {
+			// If the line ends with \r\n and the eol is not \r\n, then we need to replace it.
+			data = bytes.TrimSuffix(data, []byte("\r\n"))
+			data = append(data, eol...)
+			fixed = true
+		}
+	} else if bytes.HasSuffix(data, []byte("\r")) {
+		if !bytes.Equal(eol, []byte("\r")) {
+			// If the line ends with \r and the eol is not \r, then we need to replace it.
+			data = bytes.TrimSuffix(data, []byte("\r"))
+			data = append(data, eol...)
+			fixed = true
+		}
+	} else if bytes.HasSuffix(data, []byte("\n")) {
+		if !bytes.Equal(eol, []byte("\n")) {
+			// If the line ends with \n and the eol is not \n, then we need to replace it.
+			data = bytes.TrimSuffix(data, []byte("\n"))
+			data = append(data, eol...)
+			fixed = true
+		}
 	}
-
 	return data, fixed
 }
 
